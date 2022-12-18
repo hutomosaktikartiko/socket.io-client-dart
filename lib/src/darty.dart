@@ -6,59 +6,59 @@ import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_common/src/util/event_emitter.dart';
 
 /// Default event listeners for dart way API.
-extension DartySocket on Socket {
-  void onConnect(EventHandler handler) {
-    on('connect', handler);
-  }
+// extension DartySocket on Socket {
+//   void onConnect(EventHandler handler) {
+//     on('connect', handler);
+//   }
 
-  void onConnectError(EventHandler handler) {
-    on('connect_error', handler);
-  }
+//   void onConnectError(EventHandler handler) {
+//     on('connect_error', handler);
+//   }
 
-  void onConnectTimeout(EventHandler handler) {
-    on('connect_timeout', handler);
-  }
+//   void onConnectTimeout(EventHandler handler) {
+//     on('connect_timeout', handler);
+//   }
 
-  void onConnecting(EventHandler handler) {
-    on('connecting', handler);
-  }
+//   void onConnecting(EventHandler handler) {
+//     on('connecting', handler);
+//   }
 
-  void onDisconnect(EventHandler handler) {
-    on('disconnect', handler);
-  }
+//   void onDisconnect(EventHandler handler) {
+//     on('disconnect', handler);
+//   }
 
-  void onError(EventHandler handler) {
-    on('error', handler);
-  }
+//   void onError(EventHandler handler) {
+//     on('error', handler);
+//   }
 
-  void onReconnect(EventHandler handler) {
-    on('reconnect', handler);
-  }
+//   void onReconnect(EventHandler handler) {
+//     on('reconnect', handler);
+//   }
 
-  void onReconnectAttempt(EventHandler handler) {
-    on('reconnect_attempt', handler);
-  }
+//   void onReconnectAttempt(EventHandler handler) {
+//     on('reconnect_attempt', handler);
+//   }
 
-  void onReconnectFailed(EventHandler handler) {
-    on('reconnect_failed', handler);
-  }
+//   void onReconnectFailed(EventHandler handler) {
+//     on('reconnect_failed', handler);
+//   }
 
-  void onReconnectError(EventHandler handler) {
-    on('reconnect_error', handler);
-  }
+//   void onReconnectError(EventHandler handler) {
+//     on('reconnect_error', handler);
+//   }
 
-  void onReconnecting(EventHandler handler) {
-    on('reconnecting', handler);
-  }
+//   void onReconnecting(EventHandler handler) {
+//     on('reconnecting', handler);
+//   }
 
-  void onPing(EventHandler handler) {
-    on('ping', handler);
-  }
+//   void onPing(EventHandler handler) {
+//     on('ping', handler);
+//   }
 
-  void onPong(EventHandler handler) {
-    on('pong', handler);
-  }
-}
+//   void onPong(EventHandler handler) {
+//     on('pong', handler);
+//   }
+// }
 
 /// Option Builder to help developer to construct an options map.
 class OptionBuilder {

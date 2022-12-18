@@ -14,7 +14,16 @@ void main() {
 
   // socket.connect();
 
-  socket.onConnect((_) {
+  // socket.onConnect((_) {
+  //   socket.emit('toServer', 'init');
+
+  //   var count = 0;
+  //   Timer.periodic(const Duration(seconds: 1), (Timer countDownTimer) {
+  //     socket.emit('toServer', count++);
+  //   });
+  // });
+
+  socket.on("connect", (data) {
     socket.emit('toServer', 'init');
 
     var count = 0;

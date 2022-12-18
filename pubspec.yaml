@@ -6,8 +6,7 @@ repository: https://github.com/rikulo/socket.io-client-dart
 issue_tracker: https://github.com/rikulo/socket.io-client-dart/issues
 
 environment:
-  sdk: '>=2.6.0 <3.0.0'
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
   socket_io_common: '^2.0.0'
