@@ -280,9 +280,9 @@ class Socket extends EventEmitter {
         ondisconnect();
         break;
 
-      case CONNECT_ERROR:
-        emit('error', packet['data']);
-        break;
+      // case CONNECT_ERROR:
+      //   emit('error', packet['data']);
+      //   break;
     }
   }
 

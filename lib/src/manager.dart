@@ -311,11 +311,11 @@ class Manager extends EventEmitter {
     // if (encoding != true) {
     // encode, then write to engine with result
     // encoding = true;
-    var encodedPackets = encoder.encode(packet);
+    // var encodedPackets = encoder.encode(packet);
 
-    for (var i = 0; i < encodedPackets.length; i++) {
-      engine.write(encodedPackets[i], packet['options']);
-    }
+    // for (var i = 0; i < encodedPackets.length; i++) {
+    //   engine.write(encodedPackets[i], packet['options']);
+    // }
     // } else {
     // add packet to the queue
     // packetBuffer.add(packet);
