@@ -127,7 +127,8 @@ abstract class PollingTransport extends Transport {
     };
 
     // decode payload
-    PacketParser.decodePayload(data, socket.binaryType).forEach(callback);
+    // PacketParser.decodePayload(data, socket.binaryType).forEach(callback);
+    PacketParser.decodePayload(data).forEach(callback);
 
     // if an event did not trigger closing
     if ('closed' != readyState) {
