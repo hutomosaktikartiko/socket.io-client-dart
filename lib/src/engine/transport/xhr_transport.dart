@@ -13,11 +13,11 @@ final Logger _logger = Logger('socket_io_client:transport.XHRTransport');
 
 class XHRTransport extends PollingTransport {
   // int? requestTimeout;
-  late bool xd;
-  late bool xs;
-  Request? sendXhr;
-  Request? pollXhr;
-  late Map<String, dynamic> extraHeaders;
+  bool xd;
+  bool xs;
+  Request sendXhr;
+  Request pollXhr;
+  Map<String, dynamic> extraHeaders;
 
   ///
   /// XHR Polling constructor.
@@ -44,13 +44,13 @@ class XHRTransport extends PollingTransport {
   ///
   /// XHR supports binary
   @override
-  bool? supportsBinary = true;
+  bool supportsBinary = true;
 
   ///
   /// Creates a request.
   ///
   /// @api private
-  Request request([Map? opts]) {
+  Request request([Map opts]) {
     opts = opts ?? {};
     opts['uri'] = uri();
     opts['xd'] = xd;
@@ -117,20 +117,20 @@ class XHRTransport extends PollingTransport {
 /// @api public
 ///
 class Request extends EventEmitter {
-  late String uri;
-  late bool xd;
-  late bool xs;
-  late bool async;
-  late var data;
-  late bool agent;
-  bool? isBinary;
-  late bool supportsBinary;
-  late bool enablesXDR;
+  String uri;
+  bool xd;
+  bool xs;
+  bool async;
+  var data;
+  bool agent;
+  bool isBinary;
+  bool supportsBinary;
+  bool enablesXDR;
   // late int requestTimeout;
-  HttpRequest? xhr;
-  late String method;
-  StreamSubscription? readyStateChange;
-  Map<String, dynamic>? extraHeaders;
+  HttpRequest xhr;
+  String method;
+  StreamSubscription readyStateChange;
+  Map<String, dynamic> extraHeaders;
 
   Request(Map opts) {
     method = opts['method'] ?? 'GET';
@@ -165,7 +165,7 @@ class Request extends EventEmitter {
 
       try {
         if (extraHeaders?.isNotEmpty == true) {
-          extraHeaders!.forEach((k, v) {
+          extraHeaders.forEach((k, v) {
             xhr.setRequestHeader(k, v);
           });
         }
@@ -175,7 +175,7 @@ class Request extends EventEmitter {
 
       if ('POST' == method) {
         try {
-          if (isBinary!) {
+          if (isBinary) {
             xhr.setRequestHeader('Content-type', 'application/octet-stream');
           } else {
             xhr.setRequestHeader('Content-type', 'text/plain;charset=UTF-8');
@@ -288,7 +288,7 @@ class Request extends EventEmitter {
 
     if (fromError != null) {
       try {
-        xhr!.abort();
+        xhr.abort();
       } catch (e) {
         // ignore
       }
@@ -306,14 +306,14 @@ class Request extends EventEmitter {
     try {
       var contentType;
       try {
-        contentType = xhr!.getResponseHeader('Content-Type');
+        contentType = xhr.getResponseHeader('Content-Type');
       } catch (e) {
         // ignore
       }
       if (contentType == 'application/octet-stream') {
-        data = xhr!.response ?? xhr!.responseText;
+        data = xhr.response ?? xhr.responseText;
       } else {
-        data = xhr!.responseText;
+        data = xhr.responseText;
       }
     } catch (e) {
       onError(e);

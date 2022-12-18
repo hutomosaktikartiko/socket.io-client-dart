@@ -21,11 +21,11 @@ abstract class PollingTransport extends Transport {
   ///
   /// Transport name.
   @override
-  String? name = 'polling';
+  String name = 'polling';
 
   @override
-  bool? supportsBinary;
-  bool? polling;
+  bool supportsBinary;
+  bool polling;
 
   ///
   /// Polling interface.
@@ -127,7 +127,7 @@ abstract class PollingTransport extends Transport {
     };
 
     // decode payload
-    PacketParser.decodePayload(data, socket!.binaryType).forEach(callback);
+    PacketParser.decodePayload(data, socket.binaryType).forEach(callback);
 
     // if an event did not trigger closing
     if ('closed' != readyState) {

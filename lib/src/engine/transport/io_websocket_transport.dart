@@ -16,14 +16,14 @@ class IOWebSocketTransport extends Transport {
       Logger('socket_io_client:transport.IOWebSocketTransport');
 
   @override
-  String? name = 'websocket';
+  String name = 'websocket';
   var protocols;
 
   @override
-  bool? supportsBinary;
-  Map? perMessageDeflate;
-  Map<String, dynamic>? extraHeaders;
-  WebSocket? ws;
+  bool supportsBinary;
+  Map perMessageDeflate;
+  Map<String, dynamic> extraHeaders;
+  WebSocket ws;
 
   IOWebSocketTransport(Map opts) : super(opts) {
     var forceBase64 = opts['forceBase64'];

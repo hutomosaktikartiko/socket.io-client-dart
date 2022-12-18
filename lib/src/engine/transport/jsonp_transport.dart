@@ -28,12 +28,12 @@ var callbacks;
 
 class JSONPTransport extends PollingTransport {
 //  static var empty = (_) => '';
-  late int index;
-  ScriptElement? script;
-  FormElement? form;
-  IFrameElement? iframe;
-  TextAreaElement? area;
-  String? iframeId;
+  int index;
+  ScriptElement script;
+  FormElement form;
+  IFrameElement iframe;
+  TextAreaElement area;
+  String iframeId;
 
   ///
   /// JSONP Polling constructor.
@@ -64,7 +64,7 @@ class JSONPTransport extends PollingTransport {
     ]);
 
     // append to query string
-    query!['j'] = index;
+    query['j'] = index;
 
     // prevent spurious errors from being emitted when the window is unloaded
 //    if (window.document != null && window.addEventListener != null) {
@@ -76,7 +76,7 @@ class JSONPTransport extends PollingTransport {
 
   /// JSONP only supports binary as base64 encoded strings
   @override
-  bool? supportsBinary = false;
+  bool supportsBinary = false;
 
   ///
   /// Closes the socket.
@@ -85,12 +85,12 @@ class JSONPTransport extends PollingTransport {
   @override
   void doClose() {
     if (script != null) {
-      script!.remove();
+      script.remove();
       script = null;
     }
 
     if (form != null) {
-      form!.remove();
+      form.remove();
       form = null;
       iframe = null;
     }
@@ -117,9 +117,9 @@ class JSONPTransport extends PollingTransport {
     var scripts = document.getElementsByTagName('script');
     var insertAt = scripts.isNotEmpty ? scripts.first as ScriptElement : null;
     if (insertAt != null) {
-      insertAt.parentNode!.insertBefore(script, insertAt);
+      insertAt.parentNode.insertBefore(script, insertAt);
     } else {
-      (document.head ?? document.body!).append(script);
+      (document.head ?? document.body).append(script);
     }
     this.script = script;
 
@@ -128,7 +128,7 @@ class JSONPTransport extends PollingTransport {
     if (isUAgecko) {
       Timer(Duration(milliseconds: 100), () {
         var iframe = document.createElement('iframe');
-        document.body!.append(iframe);
+        document.body.append(iframe);
         iframe.remove();
       });
     }
@@ -156,30 +156,30 @@ class JSONPTransport extends PollingTransport {
       form.setAttribute('accept-charset', 'utf-8');
       area.name = 'd';
       form.append(area);
-      document.body!.append(form);
+      document.body.append(form);
 
       this.form = form;
       this.area = area;
     }
 
-    form!.action = uri();
+    form.action = uri();
 
     var initIframe = () {
       if (iframe != null) {
         try {
-          iframe!.remove();
+          iframe.remove();
         } catch (e) {
           onError('jsonp polling iframe removal error', e);
         }
       }
 
       iframe = document.createElement('iframe') as IFrameElement;
-      iframe!.name = iframeId;
-      iframe!.src = 'javascript:0';
+      iframe.name = iframeId;
+      iframe.src = 'javascript:0';
 
-      iframe!.id = iframeId!;
+      iframe.id = iframeId;
 
-      form!.append(iframe!);
+      form.append(iframe);
       iframe = iframe;
     };
 
@@ -188,15 +188,15 @@ class JSONPTransport extends PollingTransport {
     // escape \n to prevent it from being converted into \r\n by some UAs
     // double escaping is required for escaped new lines because unescaping of new lines can be done safely on server-side
     data = data.replaceAll(rEscapedNewline, '\\\n');
-    area!.value = data.replaceAll(rNewline, '\\n');
+    area.value = data.replaceAll(rNewline, '\\n');
 
     try {
-      form!.submit();
+      form.submit();
     } catch (e) {
       //ignore
     }
 
-    iframe!.onLoad.listen((_) {
+    iframe.onLoad.listen((_) {
       initIframe();
       fn(_);
     });

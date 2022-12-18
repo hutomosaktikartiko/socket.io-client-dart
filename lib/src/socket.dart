@@ -48,27 +48,27 @@ final Logger _logger = Logger('socket_io_client:Socket');
 /// @api public
 class Socket extends EventEmitter {
   String nsp;
-  Map? opts;
+  Map opts;
 
   Manager io;
-  late Socket json;
+  Socket json;
   num ids = 0;
   Map acks = {};
   bool connected = false;
   bool disconnected = true;
   List sendBuffer = [];
   List receiveBuffer = [];
-  String? query;
-  dynamic? auth;
-  List? subs;
+  String query;
+  dynamic auth;
+  List subs;
   Map flags = {};
-  String? id;
+  String id;
 
   Socket(this.io, this.nsp, this.opts) {
     json = this; // compat
     if (opts != null) {
-      query = opts!['query'];
-      auth = opts!['auth'];
+      query = opts['query'];
+      auth = opts['auth'];
     }
     if (io.autoConnect) open();
   }
@@ -138,7 +138,7 @@ class Socket extends EventEmitter {
   /// @return {Socket} self
   /// @api public
   void emitWithAck(String event, dynamic data,
-      {Function? ack, bool binary = false}) {
+      {Function ack, bool binary = false}) {
     if (EVENTS.contains(event)) {
       super.emit(event, data);
     } else {
@@ -164,8 +164,8 @@ class Socket extends EventEmitter {
         packet['id'] = '${ids++}';
       }
       final isTransportWritable = io.engine != null &&
-          io.engine!.transport != null &&
-          io.engine!.transport!.writable == true;
+          io.engine.transport != null &&
+          io.engine.transport.writable == true;
 
       final discardPacket =
           flags['volatile'] != null && (!isTransportWritable || !connected);
